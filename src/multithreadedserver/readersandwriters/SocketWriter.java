@@ -20,3 +20,11 @@ public class SocketWriter {
         writer.newLine();
         writer.flush();
     }
+
+    public void close() {
+        try {
+            writer.close();
+        } catch (IOException ignored) {}
+    }
+}
+
