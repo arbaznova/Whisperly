@@ -3,8 +3,6 @@ package multithreadedserver.Main;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class Server {
 
@@ -28,15 +26,6 @@ public class Server {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-    }
-    public void closeServerSocket(){
-        try{
-            if (serverSocket != null) {
-                serverSocket.close();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
