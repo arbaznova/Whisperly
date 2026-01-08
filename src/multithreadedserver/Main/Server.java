@@ -18,11 +18,12 @@ public class Server {
         while (!serverSocket.isClosed()){
 
             try {
-                Socket socket= serverSocket.accept();
-                System.out.println("A new client is connected!");
-                ClientHandler clientHandler = new  ClientHandler(socket);
-                Thread thread = new Thread(clientHandler);
-                thread.start();
+                Socket socket = serverSocket.accept();
+                System.out.println("Client connected: " + socket.getRemoteSocketAddress());
+
+                ClientHandler handler = new ClientHandler(socket);
+                new Thread(handler).start();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
