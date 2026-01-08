@@ -1,4 +1,4 @@
-package multithreadedserver;
+package multithreadedserver.Main;
 
 import multithreadedserver.readersandwriters.SocketReader;
 import multithreadedserver.readersandwriters.SocketWriter;
