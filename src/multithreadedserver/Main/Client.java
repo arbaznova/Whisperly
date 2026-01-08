@@ -55,8 +55,9 @@ public class Client {
             } catch (IOException ignored) {}
         }).start();
     }
-    public void listenForMessage(){
-        new Thread(()->{
+
+    private void listen() {
+        new Thread(() -> {
             try {
                 String msg;
                 while ((msg = reader.readLine()) != null) {
