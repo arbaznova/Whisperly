@@ -13,14 +13,23 @@ public class Client {
     private BufferedWriter bufferedWriter;
     private String clientUsername;
 
-    public Client(String clientUsername, Socket socket) {
-        try {
-            this.clientUsername = clientUsername;
-            this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-            this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            this.socket = socket;
-        } catch (IOException e) {
-            closeEverything(socket, bufferedReader, bufferedWriter);
+    private final Socket socket;
+    private final SocketReader reader;
+    private final SocketWriter writer;
+
+    public Client(String username, Socket socket) throws IOException {
+        this.socket = socket;
+        this.reader = new SocketReader(socket);
+        this.writer = new SocketWriter(socket);
+
+        // ---------- HANDSHAKE ----------
+        writer.write(username);
+
+        String response = reader.readLine();
+        if (!"OK".equals(response)) {
+            System.out.println(response);
+            close();
+            throw new IOException("Username rejected");
         }
 
         System.out.println("Connected to chat server!");
