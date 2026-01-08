@@ -14,9 +14,10 @@ public class Server {
         this.serverSocket = serverSocket;
     }
 
-    public void startServer(){
-        while (!serverSocket.isClosed()){
+    public void start() {
+        System.out.println("Server started on port " + serverSocket.getLocalPort());
 
+        while (!serverSocket.isClosed()) {
             try {
                 Socket socket = serverSocket.accept();
                 System.out.println("Client connected: " + socket.getRemoteSocketAddress());
