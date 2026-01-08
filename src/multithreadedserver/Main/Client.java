@@ -66,20 +66,13 @@ public class Client {
             } catch (IOException ignored) {}
         }).start();
     }
-    public void closeEverything(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter){
-        try{
-            if (bufferedReader != null) {
-                bufferedReader.close();
-            }
-            if (bufferedWriter != null) {
-                bufferedWriter.close();
-            }
-            if (socket != null) {
-                socket.close();
-            }
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+
+    private void close() {
+        try {
+            socket.close();
+            reader.close();
+            writer.close();
+        } catch (IOException ignored) {}
     }
 
     public static void main(String[] args) throws IOException {
