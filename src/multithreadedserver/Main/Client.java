@@ -43,11 +43,11 @@ public class Client {
     public void listenForMessage(){
         new Thread(()->{
             try {
-                String msgFromGroupchat= bufferedReader.readLine();
-                System.out.println(msgFromGroupchat);
-            } catch (IOException e) {
-                closeEverything(socket, bufferedReader, bufferedWriter);
-            }
+                String msg;
+                while ((msg = reader.readLine()) != null) {
+                    System.out.println(msg);
+                }
+            } catch (IOException ignored) {}
         }).start();
     }
     public void closeEverything(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter){
