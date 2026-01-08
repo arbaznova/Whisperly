@@ -8,7 +8,7 @@ import java.util.concurrent.Executors;
 
 public class Server {
 
-    private ServerSocket serverSocket;
+    private final ServerSocket serverSocket;
 
     public Server(ServerSocket serverSocket) {
         this.serverSocket = serverSocket;
