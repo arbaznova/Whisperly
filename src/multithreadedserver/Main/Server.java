@@ -38,14 +38,8 @@ public class Server {
         }
     }
 
-    public static void main(String[] args) {
-
-        try {
-            ServerSocket serverSocket = new ServerSocket(1234);
-            Server server = new Server(serverSocket);
-            server.startServer();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static void main(String[] args) throws IOException {
+        ServerSocket serverSocket = new ServerSocket(7777);
+        new Server(serverSocket).start();
     }
 }
