@@ -76,11 +76,9 @@ public class Client {
     }
 
     public static void main(String[] args) throws IOException {
-        String username = ConsoleWriter.readLine("Enter your username: ");
-        Socket socket1 = new Socket("localhost", 1234);
-        Client client = new Client( username, socket1);
-        client.listenForMessage();
-        client.sendMessage();
+        String username = ConsoleReader.readLine("Enter username: ");
+        Socket socket = new Socket("localhost", 7777);
+        new Client(username, socket).start();
     }
 }
 
