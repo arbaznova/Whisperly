@@ -19,6 +19,9 @@ public class Client {
         } catch (IOException e) {
             closeEverything(socket, bufferedReader, bufferedWriter);
         }
+
+        System.out.println("Connected to chat server!");
+        System.out.println("Type /help for commands");
     }
     public void sendMessage () {
         try {
