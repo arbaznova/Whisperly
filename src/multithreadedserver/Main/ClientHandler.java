@@ -5,10 +5,8 @@ import multithreadedserver.readersandwriters.SocketWriter;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.util.ArrayList;
 
-public class ClientHandler implements Runnable{
-    public static ArrayList<ClientHandler> clientHandlers = new ArrayList<>();
+public class ClientHandler implements Runnable {
 
     private final Socket socket;
     private SocketReader reader;
@@ -17,15 +15,6 @@ public class ClientHandler implements Runnable{
 
     public ClientHandler(Socket socket) {
         this.socket = socket;
-        try {
-            this.bufferedWriter= new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-            this.bufferedReader= new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            this.username = bufferedReader.readLine();
-            clientHandlers.add(this);
-            broadcastMessage("Server: "+ username + " has entered the chat!");
-        } catch (IOException e) {
-            closeEverything(socket, bufferedReader, bufferedWriter);
-        }
     }
 
     @Override
@@ -113,29 +102,3 @@ public class ClientHandler implements Runnable{
         } catch (IOException ignored) {}
     }
 }
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
