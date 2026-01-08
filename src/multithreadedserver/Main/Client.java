@@ -5,13 +5,7 @@ import multithreadedserver.readersandwriters.SocketWriter;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.util.Scanner;
-
 public class Client {
-    private Socket socket;
-    private BufferedReader bufferedReader;
-    private BufferedWriter bufferedWriter;
-    private String clientUsername;
 
     private final Socket socket;
     private final SocketReader reader;
@@ -81,19 +75,3 @@ public class Client {
         new Client(username, socket).start();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
