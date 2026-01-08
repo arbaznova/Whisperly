@@ -23,22 +23,25 @@ public class Client {
         System.out.println("Connected to chat server!");
         System.out.println("Type /help for commands");
     }
-    public void sendMessage () {
-        try {
-            bufferedWriter.write(clientUsername);
-            bufferedWriter.newLine();
-            bufferedWriter.flush();
 
-            Scanner scanner = new Scanner(System.in);
-            while (socket.isConnected()) {
-                String messageTosend = scanner.nextLine();
-                bufferedWriter.write(clientUsername + ": " + messageTosend);
-                bufferedWriter.newLine();
-                bufferedWriter.flush();
-            }
-        } catch (IOException e) {
-            closeEverything(socket, bufferedReader, bufferedWriter);
-        }
+    public void start() {
+        listen();
+        send();
+    }
+
+    private void send() {
+        new Thread(() -> {
+            try {
+                String msg;
+                while ((msg = ConsoleReader.readLine()) != null) {
+                    writer.write(msg);
+                    if (msg.equalsIgnoreCase("/quit")) {
+                        close();
+                        break;
+                    }
+                }
+            } catch (IOException ignored) {}
+        }).start();
     }
     public void listenForMessage(){
         new Thread(()->{
