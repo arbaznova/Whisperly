@@ -100,40 +100,17 @@ public class ClientHandler implements Runnable{
         }
     }
 
-    public void broadcastMessage(String messageToSend){
-        for(ClientHandler clientHandler: clientHandlers){
-            try{
-                if(!clientHandler.username.equals(username)){
-                    clientHandler.bufferedWriter.write(messageToSend);
-                    clientHandler.bufferedWriter.newLine();
-                    clientHandler.bufferedWriter.flush();
-                }
-            } catch (IOException e) {
-                closeEverything(socket, bufferedReader, bufferedWriter);
-            }
+    private void cleanup() {
+        if (username != null) {
+            ClientRegistry.remove(username);
         }
+        try {
+            socket.close();
+            reader.close();
+            writer.close();
+        } catch (IOException ignored) {}
     }
-
-    public void removeClientHandler(){
-        clientHandlers.remove(this);
-        broadcastMessage("Server: " + username + " has left the chat");
-    }
-    public void closeEverything(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter){
-        removeClientHandler();
-        try{
-            if (bufferedReader != null) {
-                bufferedReader.close();
-            }
-            if (bufferedWriter == null) {
-                bufferedWriter.close();
-            }
-            if (socket == null) {
-                socket.close();
-            }
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-    }
+}
 
 }
 
