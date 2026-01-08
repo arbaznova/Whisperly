@@ -8,9 +8,9 @@ import java.util.ArrayList;
 public class ClientHandler implements Runnable{
     public static ArrayList<ClientHandler> clientHandlers = new ArrayList<>();
 
-    private Socket socket;
-    BufferedReader bufferedReader;
-    private BufferedWriter bufferedWriter;
+    private final Socket socket;
+    private SocketReader reader;
+    private SocketWriter writer;
     private String username;
 
     public ClientHandler(Socket socket) {
