@@ -1,7 +1,9 @@
 package multithreadedserver;
 
-import java.io.*;
-import java.lang.reflect.Array;
+import multithreadedserver.readersandwriters.SocketReader;
+import multithreadedserver.readersandwriters.SocketWriter;
+
+import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 
