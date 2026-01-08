@@ -1,5 +1,9 @@
 package multithreadedserver.readersandwriters;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public class ConsoleReader {
 
     private static final BufferedReader reader =
