@@ -1,4 +1,7 @@
-package multithreadedserver;
+package multithreadedserver.Main;
+import multithreadedserver.readersandwriters.ConsoleReader;
+import multithreadedserver.readersandwriters.SocketReader;
+import multithreadedserver.readersandwriters.SocketWriter;
 
 import java.io.*;
 import java.net.Socket;
