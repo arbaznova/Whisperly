@@ -62,6 +62,14 @@ public class Server {
         while (!serverSocket.isClosed()) {
             try {
                 Socket socket = serverSocket.accept(); // TLS handshake happens HERE
+
+                // CONNECTION LIMIT CHECK
+                if (!connectionLimiter.tryAcquire()) {
+                    System.out.println("Connection rejected: server full");
+                    socket.close();
+                    continue;
+                }
+
                 System.out.println("Secure client connected: " +
                         socket.getRemoteSocketAddress());
 
