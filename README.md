@@ -2,6 +2,9 @@
 
 A production-oriented, TLS-secured, multithreaded Java chat server implementing custom application-layer protocols, X.509 PKI–backed transport security, thread-pool–driven connection handling, backpressure via connection limits, lock-free concurrent registries, command-based routing, and explicit observability hooks—engineered end-to-end without frameworks.
 
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+
 
 ✨ Key Features
 
@@ -25,7 +28,7 @@ A production-oriented, TLS-secured, multithreaded Java chat server implementing 
 
 -->No HTTPS wrappers. No Spring Security. Raw TLS over TCP.
 
-
+--------------------------------------------------------------------------
 
 🧵 Concurrency Model
 
@@ -37,7 +40,7 @@ A production-oriented, TLS-secured, multithreaded Java chat server implementing 
 
 -->No unbounded thread creation
 
-
+--------------------------------------------------------------------------
 
 🚦 Connection Management
 
@@ -49,7 +52,7 @@ A production-oriented, TLS-secured, multithreaded Java chat server implementing 
 
 -->Safe resource release on disconnect
 
-
+----------------------------------------------------------
 
 💬 Custom Chat Protocol
 
@@ -73,6 +76,7 @@ A production-oriented, TLS-secured, multithreaded Java chat server implementing 
 
   message – public broadcast
 
+--------------------------------------------------------------------------
 
 
 👥 Client Registry & Routing
@@ -85,6 +89,7 @@ A production-oriented, TLS-secured, multithreaded Java chat server implementing 
 
 -->Username validation with collision prevention
 
+--------------------------------------------------------------------------
 
 
 📊 Observability (Production-Oriented)
@@ -116,6 +121,8 @@ A production-oriented, TLS-secured, multithreaded Java chat server implementing 
 -->Periodic server self-reporting
 
 -->Designed to support future export (e.g., Prometheus)
+
+--------------------------------------------------------------------------
 
 
 
