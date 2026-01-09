@@ -91,6 +91,12 @@ public class ClientHandler implements Runnable {
         boolean sent = ClientRegistry.sendPrivate(username, target, msg);
         if (!sent) {
             writer.write("Server: User not found");
+        }else{
+            Metrics.privateMessages.incrementAndGet();
+            Logger.info("ClientHandler",
+                    "Private message: from=" + username + " to=" + target
+            );
+
         }
     }
 
