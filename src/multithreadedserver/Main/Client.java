@@ -75,8 +75,42 @@ public class Client {
     }
 
     public static void main(String[] args) throws IOException {
-        String username = ConsoleReader.readLine("Enter username: ");
-        Socket socket = new Socket("localhost", 7777);
-        new Client(username, socket).start();
+        try {
+            //Loaded truststore
+            KeyStore trustStore = KeyStore.getInstance("PKCS12");
+            trustStore.load(
+                    new FileInputStream(
+                            "src/multithreadedserver/security/client/client-truststore.p12"
+                    ),
+                    "FC#123".toCharArray()
+            );
+
+            //TrustManagerFactory
+            TrustManagerFactory tmf =
+                    TrustManagerFactory.getInstance("SunX509");
+            tmf.init(trustStore);
+
+            //SSLContext
+            SSLContext sslContext = SSLContext.getInstance("TLS");
+            sslContext.init(
+                    null,               // client has no private key
+                    tmf.getTrustManagers(),
+                    null
+            );
+
+            //secure socket
+            SSLSocketFactory factory =
+                    sslContext.getSocketFactory();
+            SSLSocket socket =
+                    (SSLSocket) factory.createSocket("localhost", 7777);
+
+            // Optional: force handshake now
+            socket.startHandshake();
+            System.out.println("TLS handshake successful. Secure channel established.");
+            String username = ConsoleReader.readLine("Enter username: ");
+            new Client(username, socket).start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
