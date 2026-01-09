@@ -31,6 +31,11 @@ public class ClientHandler implements Runnable {
 
             if (!ClientRegistry.isValidUsername(username)) {
                 writer.write("Server: Username invalid or already taken");
+                Metrics.errors.incrementAndGet();
+                Logger.warn("ClientHandler",
+                        "Invalid username attempt: " + username
+                );
+
                 cleanup();
                 return;
             }
