@@ -105,6 +105,10 @@ public class ClientHandler implements Runnable {
         } catch (IOException ignored) {}
         finally {
             //RELEASING CONNECTION SLOT
+            Metrics.activeConnections.decrementAndGet();
+            Logger.info("ClientHandler",
+                    "User disconnected: " + username
+            );
             connectionLimiter.release();
             System.out.println("Connection released. Active connections: "
                     + (Server.MAX_CONNECTIONS - connectionLimiter.availablePermits()));
