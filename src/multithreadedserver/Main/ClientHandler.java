@@ -41,7 +41,7 @@ public class ClientHandler implements Runnable {
             // ---------- MESSAGE LOOP ----------
             String input;
             while ((input = reader.readLine()) != null) {
-
+                Metrics.messagesProcessed.incrementAndGet();
                 if (input.equalsIgnoreCase("/help")) {
                     writer.write("""
                             Commands:
