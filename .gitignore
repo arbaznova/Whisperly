@@ -29,3 +29,5 @@ bin/
 .DS_Store
 
 security/server-keystore.p12
+security/client/client-truststore.p12
+security/server/server-cert.pem
