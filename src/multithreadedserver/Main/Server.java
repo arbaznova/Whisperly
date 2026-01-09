@@ -52,8 +52,9 @@ public class Server {
 
         while (!serverSocket.isClosed()) {
             try {
-                Socket socket = serverSocket.accept();
-                System.out.println("Client connected: " + socket.getRemoteSocketAddress());
+                Socket socket = serverSocket.accept(); // TLS handshake happens HERE
+                System.out.println("Secure client connected: " +
+                        socket.getRemoteSocketAddress());
 
                 ClientHandler handler = new ClientHandler(socket);
                 new Thread(handler).start();
