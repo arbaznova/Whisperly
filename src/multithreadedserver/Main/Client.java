@@ -3,6 +3,11 @@ import multithreadedserver.readersandwriters.ConsoleReader;
 import multithreadedserver.readersandwriters.SocketReader;
 import multithreadedserver.readersandwriters.SocketWriter;
 
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManagerFactory;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.Socket;
 public class Client {
