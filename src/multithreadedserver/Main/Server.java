@@ -73,7 +73,9 @@ public class Server {
                 System.out.println("Secure client connected: " +
                         socket.getRemoteSocketAddress());
 
-                executor.execute(new ClientHandler(socket));
+                executor.execute(
+                        new ClientHandler(socket, connectionLimiter)
+                );
 
             } catch (IOException e) {
                 if (!serverSocket.isClosed()) {
