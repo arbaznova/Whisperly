@@ -37,6 +37,10 @@ public class ClientHandler implements Runnable {
 
             ClientRegistry.add(username, writer);
             writer.write("OK");
+            Logger.info("ClientHandler",
+                    "User authenticated: " + username
+            );
+
 
             // ---------- MESSAGE LOOP ----------
             String input;
