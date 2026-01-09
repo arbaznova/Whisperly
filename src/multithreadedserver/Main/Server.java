@@ -68,8 +68,18 @@ public class Server {
         shutdown();
     }
 
-    public static void main(String[] args) throws IOException {
-        ServerSocket serverSocket = new ServerSocket(7777);
-        new Server(serverSocket).start();
+    private void shutdown() {
+        executor.shutdown();
+        try {
+            serverSocket.close();
+        } catch (IOException ignored) {}
+    }
+
+    public static void main(String[] args) {
+        try {
+            new Server().start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
