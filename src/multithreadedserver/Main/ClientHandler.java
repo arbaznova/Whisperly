@@ -59,6 +59,9 @@ public class ClientHandler implements Runnable {
                 }
 
                 if (input.equalsIgnoreCase("/quit")) {
+                    Logger.info("ClientHandler",
+                            "User requested disconnect: " + username
+                    );
                     writer.write("Server: Disconnected");
                     break;
                 }
