@@ -82,6 +82,10 @@ public class ClientHandler implements Runnable {
         int space = input.indexOf(" ");
         if (space == -1) {
             writer.write("Server: Invalid private message");
+            Metrics.errors.incrementAndGet();Logger.warn(
+                    "ClientHandler",
+                    "Malformed private message from " + username
+            );
             return;
         }
 
