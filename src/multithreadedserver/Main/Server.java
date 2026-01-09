@@ -11,7 +11,11 @@ import java.util.concurrent.Executors;
 
 public class Server {
 
-    private final ServerSocket serverSocket;
+    private final SSLServerSocket serverSocket;
+    private final ExecutorService executor;
+
+    private static final int PORT = 7777;
+    private static final int MAX_THREADS = 20;
 
     // ---- TLS CONFIG ----
     private static final String KEYSTORE_PATH = "security/server-keystore.p12";
