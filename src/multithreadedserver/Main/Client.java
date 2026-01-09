@@ -10,6 +10,8 @@ import javax.net.ssl.TrustManagerFactory;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.security.KeyStore;
+
 public class Client {
 
     private final Socket socket;
