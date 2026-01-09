@@ -17,6 +17,7 @@ public class ClientHandler implements Runnable {
 
     public ClientHandler(Socket socket, Semaphore limiter) {
         this.socket = socket;
+        this.connectionLimiter = limiter;
     }
 
     @Override
