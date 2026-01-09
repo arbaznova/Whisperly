@@ -1,76 +1,151 @@
-Multithreaded Chat Server (Java)
+🔐 Secure Multithreaded Chat Server (Java, TLS, Zero Auto-Config)
 
-A from-scratch, protocol-driven, multithreaded chat system built using Java sockets, designed to deeply understand networking, concurrency, and security fundamentals without relying on frameworks or managed services.
+A from-scratch, TLS-secured, multithreaded chat server built in Java using raw sockets, explicit concurrency control, manual PKI management, and a custom application-layer protocol — no frameworks, no Spring, no auto-configuration.
 
-This project intentionally avoids auto-configuration and high-level abstractions in favor of manual system design, explicit protocols, and low-level control over connections, threads, and data flow.
-
-
-
-🚀 Project Overview
-This application is a TCP-based client–server chat system that supports:
-Multiple concurrent clients
-Public and private messaging
-Username validation and lifecycle management
-Command-based protocol (/users, /quit, private messages)
-Clean architectural separation (Server, ClientHandler, Registry, I/O abstractions)
-TLS-ready design (encryption integration in progress)
-The system currently runs locally and is architected to be extended to encrypted, multi-machine deployment.
+This project is intentionally designed to explore how real backend systems work under the hood, rather than abstracting everything away behind managed services or libraries.
 
 
-🧠 Why This Project Exists
-Most modern backend projects hide complexity behind frameworks, cloud services, and auto-configured networking stacks.
-This project was built to:
-->Understand how client–server systems actually work
-->Learn socket programming and concurrency from first principles
-->Design and evolve a custom application-layer protocol
-->Reason about threading, blocking I/O, failure modes, and cleanup
-->Prepare for manual TLS integration using keystores and truststores
+🧠 Motivation
+Most chat applications and backend services today rely heavily on:
+
+Framework-managed networking
+
+Auto-configured TLS
+
+Cloud-managed security and scaling
+
+This project takes the opposite approach.
+
+The goal is to:
+
+Understand networking, security, and concurrency at the JVM level
+
+Manually design and enforce system boundaries
+
+Build production-grade behavior from first principles
+
+✨ Key Features
+
+🔒 Transport Security (TLS)
+
+Manual TLS integration using JSSE
+
+Explicit use of:
+
+SSLContext
+
+SSLServerSocket / SSLSocket
+
+Custom PKCS12 keystore & truststore
+
+Certificate generation and trust configuration via keytool
+
+TLS 1.3 enforced
+
+Clear separation of identity (keystore) and trust (truststore)
+
+No HTTPS wrappers. No Spring Security. Raw TLS over TCP.
 
 
-🏗️ Architecture
-multithreadedserver/
-├── Main/
-│   ├── Server.java            # Accepts connections, spawns client handlers
-│   ├── Client.java            # Console-based client with async send/receive
-│   ├── ClientHandler.java     # Per-client thread, protocol interpreter
-│   └── ClientRegistry.java    # Thread-safe client management & routing
-│
-├── readersandwriters/
-│   ├── SocketReader.java      # Abstraction over socket input
-│   ├── SocketWriter.java      # Abstraction over socket output
-│   ├── ConsoleReader.java     # Console input abstraction
-│   └── ConsoleWriter.java     # Console output abstraction
-│
-└── security/ (planned)
-    ├── keystore/
-    └── truststore/
+
+🧵 Concurrency Model
+
+Thread-pooled server architecture
+
+Server owns concurrency via ExecutorService
+
+Predictable memory usage and controlled scheduling
+
+No unbounded thread creation
 
 
 
-🧪 Running the Project (Local)
-1. Start the Server
-java Server
-2. Start Multiple Clients
-java Client
+🚦 Connection Management
 
-Each client runs in its own terminal and communicates over TCP.
+Hard connection limits enforced using Semaphore
 
+Graceful rejection of excess clients
 
-🛠️ Technologies Used
-Java SE
-TCP Sockets (ServerSocket, Socket)
-Multithreading
-Blocking I/O (BufferedReader, BufferedWriter)
-Concurrent Collections
-Custom Protocol Design
-JSSE (TLS concepts, upcoming)
+Clean connection lifecycle tracking
+
+Safe resource release on disconnect
 
 
-📈 Future Roadmap
-TLS-encrypted sockets (SSLServerSocket, SSLSocket)
-Certificate-based authentication
-End-to-end encryption for private messages
-Deployment on a public server (multi-machine chat)
-Connection limits and thread pool optimization
-Logging, metrics, and observability
-Message persistence
+
+💬 Custom Chat Protocol
+
+Lightweight, text-based application protocol
+
+Explicit handshake:
+
+Username validation
+
+Server acknowledgment
+
+Supported commands:
+
+/help – command reference
+
+/users – list online users
+
+/quit – graceful disconnect
+
+@username message – private messaging
+
+message – public broadcast
+
+👥 Client Registry & Routing
+
+Thread-safe user registry via ConcurrentHashMap
+
+Real-time user presence tracking
+
+Private and broadcast message routing
+
+Username validation with collision prevention
+
+
+
+📊 Observability (Production-Oriented)
+
+Built-in observability without external tools:
+
+Structured logging
+
+Component-aware logs
+
+Clear lifecycle visibility
+
+Metrics collection
+
+Active connections
+
+Total connections
+
+Rejected connections
+
+Messages processed
+
+Private message usage
+
+Error counts
+
+Live metrics reporting
+
+Periodic server self-reporting
+
+Designed to support future export (e.g., Prometheus)
+
+
+
+🔑 Security Model
+
+Server authentication via X.509 certificate
+
+Client validates server identity using truststore
+
+No plaintext communication
+
+TLS handshake occurs before protocol negotiation
+
+Designed to support mutual TLS (mTLS) in future
