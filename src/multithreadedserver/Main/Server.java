@@ -110,6 +110,7 @@ public class Server {
     }
 
     private void shutdown() {
+        Logger.info("Server", "Server shutting down gracefully");
         executor.shutdown();
         try {
             serverSocket.close();
