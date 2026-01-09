@@ -13,7 +13,9 @@ public class ClientHandler implements Runnable {
     private SocketWriter writer;
     private String username;
 
-    public ClientHandler(Socket socket) {
+    private final Semaphore connectionLimiter;
+
+    public ClientHandler(Socket socket, Semaphore limiter) {
         this.socket = socket;
     }
 
