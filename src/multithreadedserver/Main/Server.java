@@ -26,7 +26,7 @@ public class Server {
     private final Semaphore connectionLimiter = new Semaphore(MAX_CONNECTIONS);
 
     // ---- TLS CONFIG ----
-    private static final String KEYSTORE_PATH = "security/server-keystore.p12";
+    private static final String KEYSTORE_PATH = "src/multithreadedserver/security/server/server-keystore.p12";
     private static final String KEYSTORE_PASSWORD = "Arbaz@123";
 
     public Server() throws Exception {
