@@ -79,7 +79,11 @@ public class Server {
 
                 // CONNECTION LIMIT CHECK
                 if (!connectionLimiter.tryAcquire()) {
-                    System.out.println("Connection rejected: server full");
+                    Metrics.rejectedConnections.incrementAndGet();
+                    Logger.warn("Server",
+                            "Connection rejected (capacity reached). Active="
+                                    + (MAX_CONNECTIONS - connectionLimiter.availablePermits())
+                    );
                     socket.close();
                     continue;
                 }
