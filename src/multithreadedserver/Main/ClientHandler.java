@@ -1,5 +1,7 @@
 package multithreadedserver.Main;
 
+import multithreadedserver.observability.Logger;
+import multithreadedserver.observability.Metrics;
 import multithreadedserver.readersandwriters.SocketReader;
 import multithreadedserver.readersandwriters.SocketWriter;
 
