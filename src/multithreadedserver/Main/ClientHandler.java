@@ -22,6 +22,10 @@ public class ClientHandler implements Runnable {
 
     @Override
     public void run() {
+        Logger.info("ClientHandler",
+                "Handshake started from " + socket.getRemoteSocketAddress()
+        );
+
         try {
             reader = new SocketReader(socket);
             writer = new SocketWriter(socket);
