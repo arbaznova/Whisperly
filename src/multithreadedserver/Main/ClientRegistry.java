@@ -34,6 +34,10 @@ public class ClientRegistry {
     }
 
     public static void remove(String username) {
+        Logger.info("Registry",
+                "User removed: " + username +
+                        " | online=" + clients.size()
+        );
         clients.remove(username);
         broadcast("Server: " + username + " left", username);
     }
