@@ -60,9 +60,12 @@ public class Server {
                 new Thread(handler).start();
 
             } catch (IOException e) {
-                e.printStackTrace();
+                if (!serverSocket.isClosed()) {
+                    e.printStackTrace();
+                }
             }
         }
+        shutdown();
     }
 
     public static void main(String[] args) throws IOException {
