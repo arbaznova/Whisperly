@@ -24,6 +24,11 @@ public class ClientRegistry {
 
     // ---------- ADD / REMOVE ----------
     public static void add(String username, SocketWriter writer) {
+        Logger.info("Registry",
+                "User registered: " + username +
+                        " | online=" + clients.size()
+        );
+
         clients.put(username, writer);
         broadcast("Server: " + username + " joined", username);
     }
