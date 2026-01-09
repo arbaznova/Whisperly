@@ -110,8 +110,11 @@ public class ClientHandler implements Runnable {
                     "User disconnected: " + username
             );
             connectionLimiter.release();
-            System.out.println("Connection released. Active connections: "
-                    + (Server.MAX_CONNECTIONS - connectionLimiter.availablePermits()));
+            Logger.info("ClientHandler",
+                    "Connection slot released. Active="
+                            + (Server.MAX_CONNECTIONS - connectionLimiter.availablePermits())
+            );
+
         }
     }
 }
