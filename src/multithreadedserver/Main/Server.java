@@ -72,6 +72,10 @@ public class Server {
         while (!serverSocket.isClosed()) {
             try {
                 Socket socket = serverSocket.accept(); // TLS handshake happens HERE
+                Metrics.totalConnections.incrementAndGet();
+                Logger.info("Server",
+                        "Incoming connection attempt from " + socket.getRemoteSocketAddress()
+                );
 
                 // CONNECTION LIMIT CHECK
                 if (!connectionLimiter.tryAcquire()) {
