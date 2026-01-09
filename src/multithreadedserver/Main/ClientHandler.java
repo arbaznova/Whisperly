@@ -100,5 +100,12 @@ public class ClientHandler implements Runnable {
             reader.close();
             writer.close();
         } catch (IOException ignored) {}
+        finally {
+            //RELEASING CONNECTION SLOT
+            connectionLimiter.release();
+            System.out.println("Connection released. Active connections: "
+                    + (Server.MAX_CONNECTIONS - connectionLimiter.availablePermits()));
+        }
     }
 }
+
