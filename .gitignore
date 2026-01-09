@@ -27,6 +27,11 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+security/
+server-keystore.p12
+server/server-cert.pem
+client/
+client-truststore.p12
 
 security/server-keystore.p12
 security/client/client-truststore.p12
