@@ -21,6 +21,9 @@ public class Server {
 
     private static final int PORT = 7777;
     private static final int MAX_THREADS = 20;
+    static final int MAX_CONNECTIONS = 50;
+
+    private final Semaphore connectionLimiter = new Semaphore(MAX_CONNECTIONS);
 
     // ---- TLS CONFIG ----
     private static final String KEYSTORE_PATH = "security/server-keystore.p12";
