@@ -60,8 +60,10 @@ public class Server {
         sslServerSocket.setNeedClientAuth(false); // mutual TLS later if needed
         sslServerSocket.setEnabledProtocols(new String[]{"TLSv1.3"});
 
-        System.out.println("TLS server started on port " + PORT);
-        return sslServerSocket;
+        Logger.info("Server",
+                "TLS enabled | protocol=TLSv1.3 | maxThreads=" + MAX_THREADS +
+                        " | maxConnections=" + MAX_CONNECTIONS
+        );        return sslServerSocket;
     }
 
     public void start() {
