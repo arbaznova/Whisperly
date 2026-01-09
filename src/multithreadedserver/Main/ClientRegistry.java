@@ -48,7 +48,12 @@ public class ClientRegistry {
             if (!user.equals(exclude)) {
                 try {
                     writer.write(message);
-                } catch (Exception ignored) {}
+                } catch (Exception ignored) {
+                    Metrics.errors.incrementAndGet();
+                    Logger.warn("Registry",
+                            "Failed to deliver message to " + user
+                    );
+                }
             }
         });
     }
