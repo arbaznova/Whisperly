@@ -87,6 +87,11 @@ public class Server {
                     socket.close();
                     continue;
                 }
+                Metrics.activeConnections.incrementAndGet();
+                Logger.info("Server",
+                        "Connection accepted. Active="
+                                + (MAX_CONNECTIONS - connectionLimiter.availablePermits())
+                );
 
                 System.out.println("Secure client connected: " +
                         socket.getRemoteSocketAddress());
