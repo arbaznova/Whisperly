@@ -119,6 +119,7 @@ public class Server {
 
     public static void main(String[] args) {
         try {
+            new Thread(new MetricsReporter()).start();
             new Server().start();
             new Thread(new MetricsReporter()).start();
         } catch (Exception e) {
