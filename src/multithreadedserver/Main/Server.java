@@ -43,7 +43,7 @@ public class Server {
                 KEYSTORE_PASSWORD.toCharArray()
         );
 
-        // 2️⃣ KeyManager (server identity)
+        // KeyManager (server identity)
         KeyManagerFactory kmf =
                 KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
         kmf.init(keyStore, KEYSTORE_PASSWORD.toCharArray());
