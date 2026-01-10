@@ -36,7 +36,7 @@ public class Server {
 
     private SSLServerSocket createSSLServerSocket() throws Exception {
 
-        // 1️⃣ Load server keystore
+        //Load server keystore
         KeyStore keyStore = KeyStore.getInstance("PKCS12");
         keyStore.load(
                 new FileInputStream(KEYSTORE_PATH),
