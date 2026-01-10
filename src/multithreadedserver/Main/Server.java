@@ -121,8 +121,7 @@ public class Server {
         try {
             new Thread(new MetricsReporter()).start();
             new Server().start();
-            new Thread(new MetricsReporter()).start();
-        } catch (Exception e) {
+            } catch (Exception e) {
             e.printStackTrace();
         }
     }
