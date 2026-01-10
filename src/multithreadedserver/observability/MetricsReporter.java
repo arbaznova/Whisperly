@@ -4,7 +4,7 @@ public class MetricsReporter implements Runnable {
 
     @Override
     public void run() {
-        while (true) {
+        while (!Thread.currentThread().isInterrupted()) {
             try {
                 Thread.sleep(10_000);
             } catch (InterruptedException ignored) {}
