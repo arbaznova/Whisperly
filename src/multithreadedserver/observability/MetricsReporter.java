@@ -6,9 +6,10 @@ public class MetricsReporter implements Runnable {
     public void run() {
         while (!Thread.currentThread().isInterrupted()) {
             try {
-                Thread.sleep(10_000);
-            } catch (InterruptedException ignored) {}
-
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             Logger.info("Metrics",
                     "active=" + Metrics.activeConnections.get() +
                             ", total=" + Metrics.totalConnections.get() +
