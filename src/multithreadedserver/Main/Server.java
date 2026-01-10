@@ -52,7 +52,7 @@ public class Server {
         SSLContext sslContext = SSLContext.getInstance("TLS");
         sslContext.init(kmf.getKeyManagers(), null, null);
 
-        // 4️⃣ Create SSL server socket
+        // Create SSL server socket
         SSLServerSocketFactory factory = sslContext.getServerSocketFactory();
         SSLServerSocket sslServerSocket =
                 (SSLServerSocket) factory.createServerSocket(PORT);
