@@ -48,7 +48,7 @@ public class Server {
                 KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
         kmf.init(keyStore, KEYSTORE_PASSWORD.toCharArray());
 
-        // 3️⃣ TLS context
+        // TLS context
         SSLContext sslContext = SSLContext.getInstance("TLS");
         sslContext.init(kmf.getKeyManagers(), null, null);
 
